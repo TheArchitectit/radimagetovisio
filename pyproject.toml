@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "radimagetovisio"
+version = "0.1.0"
+description = "Cross-platform GUI application to convert images into Visio-compatible diagrams"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-3-Clause" }
+authors = [
+    { name = "radimagetovisio contributors" },
+]
+keywords = ["visio", "diagram", "ocr", "image-processing", "svg", "vsdx"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Office/Business",
+]
+
+dependencies = [
+    "PyQt6>=6.5",
+    "opencv-python>=4.8",
+    "numpy>=1.24",
+    "Pillow>=10.0",
+    "pytesseract>=0.3.10",
+    "svgwrite>=1.4",
+    "lxml>=4.9",
+]
+
+[project.optional-dependencies]
+dicom = ["pydicom>=2.4"]
+dev = [
+    "pytest>=8.0",
+    "pytest-qt>=4.2",
+    "pytest-cov>=4.0",
+    "black>=24.0",
+    "ruff>=0.4.0",
+    "mypy>=1.9",
+    "pyinstaller>=6.0",
+]
+
+[project.scripts]
+radimagetovisio = "radimagetovisio.__main__:main"
+
+[project.gui-scripts]
+radimagetovisio-gui = "radimagetovisio.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/radimagetovisio"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/assets",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501", "UP031", "N802", "N806"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+exclude = ["tests/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+qt_api = "pyqt6"
+addopts = "--cov=radimagetovisio --cov-report=term-missing"
