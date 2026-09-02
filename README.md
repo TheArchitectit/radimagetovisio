@@ -1,4 +1,5 @@
 # RadImageToVisio
+[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
 Cross-platform desktop application that converts images into Visio-compatible diagrams using computer vision and OCR.
 
